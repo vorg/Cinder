@@ -22,7 +22,6 @@
 
 #include "cinder/gl/gl.h"
 #include "cinder/gl/GlslProg.h"
-#include <OpenGL/glu.h>
 
 using namespace std;
 
