@@ -22,6 +22,7 @@
 
 #include "cinder/gl/gl.h"
 #include "cinder/gl/GlslProg.h"
+#include <OpenGL/glu.h>
 
 using namespace std;
 
@@ -92,6 +93,13 @@ void GlslProg::loadShader( const char *shaderSource, GLint shaderType )
 
 void GlslProg::link()
 {
+	glProgramParameteriEXT(mObj->mHandle , GL_GEOMETRY_INPUT_TYPE_EXT, GL_TRIANGLES);
+	glProgramParameteriEXT(mObj->mHandle , GL_GEOMETRY_OUTPUT_TYPE_EXT, GL_TRIANGLE_STRIP);
+	
+	int maxOutput;
+	glGetIntegerv(GL_MAX_GEOMETRY_OUTPUT_VERTICES_EXT, &maxOutput);
+	glProgramParameteriEXT(mObj->mHandle , GL_GEOMETRY_VERTICES_OUT_EXT, maxOutput);
+	
 	glLinkProgram( mObj->mHandle );	
 }
 
